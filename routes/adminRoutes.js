@@ -111,4 +111,6 @@ router.delete('/:id', async (req, res) => { // Define la ruta DELETE en /admins/
 
 });
 
+
+
 module.exports = router; // Exporta el router para usarlo en otros archivos.

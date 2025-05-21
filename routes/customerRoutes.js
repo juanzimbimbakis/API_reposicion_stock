@@ -77,11 +77,31 @@ router.put('/:id', async (req, res) => { // Define la ruta PUT en /customers/:id
             mensaje: 'Cliente actualizado correctamente',
             cliente: cliente
         }); // Devuelve el cliente actualizado.
-        
+
     } catch(err)
     {
         console.error(err); // Si hay error, lo muestra en consola.
         res.status(500).json({mensaje: 'Error al actualizar el cliente'}); // Devuelve error 500 al cliente.
+    }
+
+});
+
+// DELETE /customers/:id -> Eliminamos un cliente por id
+router.delete('/:id', async (req, res) => { // Define la ruta DELETE en /customers/:id
+
+    try
+    {
+        const cliente = await Customer.findById(req.params.id); // Busca el cliente por id en la base de datos.
+        if (!cliente)
+        {
+            return res.status(404).json({mensaje: 'Cliente no encontrado'}); // Si no existe, devuelve 404.
+        }
+        await cliente.remove(); // Elimina el cliente de la base de datos.
+        res.json({mensaje: 'Cliente eliminado correctamente'}); // Devuelve mensaje de exito.
+    } catch(err)
+    {
+        console.error(err); // Si hay error, lo muestra en consola.
+        res.status(500).json({mensaje: 'Error al eliminar el cliente'}); // Devuelve error 500 al cliente.
     }
 
 });

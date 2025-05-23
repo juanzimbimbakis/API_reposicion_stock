@@ -83,6 +83,27 @@ router.get('/:id', async (req, res) => { // Define la ruta GET en /stockMovement
 
 });
 
+// GET /stockMovements/producto/:id -> buscamos movimiento de stock por id de producto
+router.get('/producto/:id', async (req, res) => { // Define la ruta GET en /stockMovements/producto/:id
+
+    try
+    {
+        const movimientos = await StockMovement.find({ producto: req.params.id }); // Busca los movimientos de stock por id de producto en la base de datos.
+        if (!movimientos) 
+        {
+            return res.status(404).json({mensaje: 'No se encontró movimientos de stock con este id de producto'}); // Si no existe, devuelve 404.
+        }
+            
+        res.json(movimientos); // Devuelve el movimiento de stock encontrado.
+    }
+    catch(err)
+    {
+        console.error(err); // Si hay error, lo muestra en consola.
+        res.status(500).json({mensaje: 'Error al obtener los movimientos de stock'}); // Devuelve error 500 al cliente.
+    }
+
+});
+
 // PUT /stockMovements/:id -> Actualizamos un movimiento de stock por id
 router.put('/:id', async (req, res) => { // Define la ruta PUT en /stockMovements/:id
 

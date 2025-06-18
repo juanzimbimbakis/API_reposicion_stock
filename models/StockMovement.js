@@ -1,5 +1,3 @@
-const { default: mongoose } = require("mongoose")
-
 const mongoose = require("mongoose");
 
 const stockMovementSchema = new mongoose.Schema({

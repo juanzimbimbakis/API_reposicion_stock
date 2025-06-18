@@ -5,7 +5,7 @@ const app = express();
 
 const uri = process.env.MONGODB_URI;
 
-mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(uri)
   .then(() => {
     console.log('Conectado a MongoDB Atlas');
     app.listen(8081, () => {

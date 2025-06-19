@@ -93,6 +93,12 @@ const supplierRoutes = require('./routes/supplierRoutes');
 // Usamos las rutas modularizadas
 app.use('/suppliers', supplierRoutes);
 
+const stockMovementRoutes = require('./routes/stockMovementRoutes');
+// Usamos las rutas modularizadas
+app.use('/stockMovements', stockMovementRoutes);
+
+
+
 
 
 

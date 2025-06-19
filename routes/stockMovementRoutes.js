@@ -84,7 +84,7 @@ router.get('/:id', async (req, res) => { // Define la ruta GET en /stockMovement
 });
 
 // GET /stockMovements/producto/:id -> buscamos movimiento de stock por id de producto
-router.get('/producto/:id', async (req, res) => { // Define la ruta GET en /stockMovements/producto/:id
+router.get('/product/:id', async (req, res) => { // Define la ruta GET en /stockMovements/producto/:id
 
     try
     {
@@ -92,6 +92,48 @@ router.get('/producto/:id', async (req, res) => { // Define la ruta GET en /stoc
         if (!movimientos) 
         {
             return res.status(404).json({mensaje: 'No se encontró movimientos de stock con este id de producto'}); // Si no existe, devuelve 404.
+        }
+            
+        res.json(movimientos); // Devuelve el movimiento de stock encontrado.
+    }
+    catch(err)
+    {
+        console.error(err); // Si hay error, lo muestra en consola.
+        res.status(500).json({mensaje: 'Error al obtener los movimientos de stock'}); // Devuelve error 500 al cliente.
+    }
+
+});
+
+// GET /stockMovements/cliente/:id -> buscamos movimiento de stock por id de cliente
+router.get('/customer/:id', async (req, res) => { // Define la ruta GET en /stockMovements/cliente/:id
+
+    try
+    {
+        const movimientos = await StockMovement.find({ cliente: req.params.id }); // Busca los movimientos de stock por id de cliente en la base de datos.
+        if (!movimientos) 
+        {
+            return res.status(404).json({mensaje: 'No se encontró movimientos de stock con este id de cliente'}); // Si no existe, devuelve 404.
+        }
+            
+        res.json(movimientos); // Devuelve el movimiento de stock encontrado.
+    }
+    catch(err)
+    {
+        console.error(err); // Si hay error, lo muestra en consola.
+        res.status(500).json({mensaje: 'Error al obtener los movimientos de stock'}); // Devuelve error 500 al cliente.
+    }
+
+});
+
+// GET /stockMovements/supplier/:id -> buscamos movimiento de stock por id de proveedor
+router.get('/supplier/:id', async (req, res) => { // Define la ruta GET en /stockMovements/supplier/:id
+
+    try
+    {
+        const movimientos = await StockMovement.find({ proveedor: req.params.id }); // Busca los movimientos de stock por id de proveedor en la base de datos.
+        if (!movimientos) 
+        {
+            return res.status(404).json({mensaje: 'No se encontró movimientos de stock con este id de proveedor'}); // Si no existe, devuelve 404.
         }
             
         res.json(movimientos); // Devuelve el movimiento de stock encontrado.

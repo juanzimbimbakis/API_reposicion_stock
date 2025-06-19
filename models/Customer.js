@@ -12,3 +12,16 @@ const customerSchema = new mongoose.Schema({
 const Customer = mongoose.model('Customer', customerSchema);
 
 module.exports = Customer;
+
+/*
+
+{
+"nombre": "Juan Ignacio",
+"apellido": "Zimbimbakis",
+"dni": "44700211",
+"direccion": "Calle Falsa 123",
+"telefono": "3766882298",
+"email": "colozim47@gmail.com"
+}
+
+*/
